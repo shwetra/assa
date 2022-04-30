@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="contact.html">Contact List</a></div>
+      <div><a href="favourites.html">Favourites</a></div>
+    </div>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Contact Name</th>
+            <th>Mobile Number</th>
+            <th>Type</th>
+            <th>Favourites</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    //code your js part here
+    //append your output to tbody
+    var tata=JSON.parse(localStorage.getItem("contactList"))
+      displayData(tata)
+
+      var sangham=JSON.parse(localStorage.getItem("favourites")) || []
+    function displayData(data){
+      data.forEach(function(ele){
+
+        var row=document.createElement("tr");
+
+        var col1=document.createElement("td");
+        col1.innerText=ele.name;
+
+        var col2=document.createElement("td");
+        col2.innerText=ele.mobile;
+
+        var col3=document.createElement("td");
+        col3.innerText=ele.type;
+
+        var col4=document.createElement("td")
+        col4.innerText="favourites"
+        col4.style.cursor="pointer"
+        col4.addEventListener("click",function(){
+        begum(ele)
+        })
+
+        row.append(col1,col2,col3,col4)
+        document.querySelector("tbody").append(row)
+
+      })
+        
+      function begum(ele){
+        sangham.push(ele)
+        console.log(sangham)
+        localStorage.setItem("favourites",JSON.stringify(sangham))
+       window.location.href="favourites.html"
+      }
+     
+    }
+
+
+  </script>
+</html>
